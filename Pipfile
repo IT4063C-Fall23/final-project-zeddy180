@@ -8,6 +8,13 @@ ipykernel = "*"
 jupyter = "*"
 notebook = "*"
 black = "*"
+opendatasets = "*"
+colorama = "*"
+pandas = "*"
+numpy = "*"
+beautifulsoup4 = "*"
+requests = "*"
+lxml = "*"
 
 [dev-packages]
 

@@ -15,6 +15,9 @@ numpy = "*"
 beautifulsoup4 = "*"
 requests = "*"
 lxml = "*"
+scikit-learn = "*"
+matplotlib = "*"
+joblib = "*"
 
 [dev-packages]
 

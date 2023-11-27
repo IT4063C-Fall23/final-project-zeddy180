@@ -178,15 +178,48 @@ plt.show
 
 # ## Data Cleaning
 
-# In[ ]:
+# In[27]:
 
 
+suicide_without_na = suicide_df.dropna () #removing empty data from the data frame
 
 
+# In[29]:
+
+
+suicide_without_na.isnull().sum() #Print the new data frame with dropped null values
+
+
+# ## Machine Learning Plan
+
+# What type of machine learning model are you planning to use?
+# 
+# I intend on using the regression model in trying to find the best fit line and for the predictive analysis of the discrete data values. For the Cyberbullying tweets, I intend on using the K-Nearest neighbbor algorithm to try and train the model to recognize patterns in words from the word cloud.
+# 
+# What are the challenges have you identified/are you anticipating in building your machine learning model?
+# 
+# The challenges are mostly lack of labeled datasets for most of the sources I find, especially for the cyberbullying datasets. The other challenge is hardship in finding the relation between the datasets due to the missing labels and a clustering attribute.
+# 
+# 
+# How are you planning to address these challenges?
+# 
+# To deal with these challenges, I consider using active-learning, which may include selecting the most useful information from the unlabelled datasets and labelling them for an easy reference and training of the model. I also consider restructuring the datasets to only extract the columns that may be the most useful for this project.
+
+# ## Machine Learning Implementation Process
+
+# - Extract the age column from the suicide data
+# -Extract the number of suicide reports from the data
+# -Remove all the empty values from the data
+# -Find the Mean
+# -Impute the empty values with the mean
+# -Plot a graph of the age against the number of suicide reported and label the age groups\
+# -Compute the RMSE for the number of suicide reported
+# -Separate the data into Train and Test data and display the best fit line.
+# -Use the pipeline to predict the future trends using the best fit line.
 
 # ## Peer feedback
 # 
-# I have not received any feedback so far. I tried looking at the assignment submission, the Git hub repository as well as the grade section but I could not see any peer feedback, or assignee that I was supposed to review
+# Psolademi commented that they like the concept of my project and what you are doing with this, the datasets are also coning along rightly so far. Based on these comments I will keep on working on my project and take into consideration any further feedback.
 
 # ## Resources and References
 # *What resources and references have you used for this project?*
@@ -203,3 +236,9 @@ plt.show
 
 # # ⚠️ Make sure you run this cell at the end of your notebook before every submission!
 # !jupyter nbconvert --to python source.ipynb
+
+# In[26]:
+
+
+get_ipython().system('jupyter nbconvert --to python source.ipynb')
+

@@ -18,6 +18,8 @@ lxml = "*"
 scikit-learn = "*"
 matplotlib = "*"
 joblib = "*"
+wordcloud = "*"
+plotly = "*"
 
 [dev-packages]
 

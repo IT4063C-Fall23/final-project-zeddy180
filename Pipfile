@@ -20,6 +20,7 @@ matplotlib = "*"
 joblib = "*"
 wordcloud = "*"
 plotly = "*"
+statsmodels = "*"
 
 [dev-packages]
 

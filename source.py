@@ -47,7 +47,7 @@
 # 📝 <!-- Start Discussing the project here; you can add as many code cells as you need -->
 # I will use the data from Kaggle to identify the target demographic for the cyberbullying tweets, I then will analyse that data against the suicide data from both Kaggle and cdc to determine the average age group where suicide is more imminent and using the age and gender demographics to find a correlation by linear Regression and visualizations.
 
-# In[129]:
+# In[146]:
 
 
 #importing libraries
@@ -88,23 +88,23 @@ np.random.seed(42)
 
 
 
-# In[47]:
+# In[147]:
 
 
 from wordcloud import WordCloud 
 
 
-# In[ ]:
+# In[148]:
 
 
 # Data sources
 
-tweets_url= "https://www.kaggle.com/datasets/soorajtomar/cyberbullying-tweets"
+#tweets_url= "https://www.kaggle.com/datasets/soorajtomar/cyberbullying-tweets"
 
-od.download (tweets_url, data_dir= "\data")
+#od.download (tweets_url, data_dir= "\data")
 
 
-# In[20]:
+# In[149]:
 
 
 tweets_df = pd.read_csv ('./data/cyber/cyberbullying_tweets.csv')
@@ -112,16 +112,16 @@ tweets_df = pd.read_csv ('./data/cyber/cyberbullying_tweets.csv')
 tweets_df.head()
 
 
-# In[3]:
+# In[150]:
 
 
 #Data Source 2
-suicide_url= "https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch"
+#suicide_url= "https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch"
 
-od.download (suicide_url, data_dir= "./data")
+#od.download (suicide_url, data_dir= "./data")
 
 
-# In[49]:
+# In[151]:
 
 
 suicide_df = pd.read_csv ('data/suicide.csv')
@@ -131,33 +131,33 @@ suicide_df.head(10)
 
 
 
-# In[39]:
+# In[152]:
 
 
 suicide_df.describe ()
 
 
-# In[8]:
+# In[153]:
 
 
 #Exploring the records that have null values ready for cleaning
 suicide_df.isnull().sum()
 
 
-# In[9]:
+# In[154]:
 
 
 suicide_df.hist (bins=50, figsize= (20, 15) )
 plt.show
 
 
-# In[97]:
+# In[155]:
 
 
 print(suicide_df.columns.tolist())
 
 
-# In[10]:
+# In[156]:
 
 
 cdc_url= "https://www.cdc.gov/mmwr/volumes/69/su/su6901a6.htm"
@@ -178,19 +178,19 @@ cdc_data_df
 # 
 # I am unable to string the suicide dataset to the other datasets as the dataset does not specify the reason for the suicide and all that can be made at this point are assumptions
 
-# In[21]:
+# In[157]:
 
 
 suicide_df.head()
 
 
-# In[79]:
+# In[158]:
 
 
 suicide_df.info()
 
 
-# In[25]:
+# In[159]:
 
 
 #Viewing a histogram to better understand the data
@@ -198,7 +198,7 @@ suicide_df.hist (bins=50, figsize= (20, 15) )
 plt.show
 
 
-# In[91]:
+# In[160]:
 
 
 #Plotting the scatter plot to see how the different variables withing the data relate to each other
@@ -206,28 +206,28 @@ scatter_matrix (suicide_df[['suicides_no', 'population', 'gdp_per_capita ($)'  ]
 plt.show
 
 
-# In[87]:
+# In[161]:
 
 
 #Plotting a graph showing how the age groups relate to the number of reported suicide cases
 suicide_df.plot(kind='scatter', x='age', y='suicides_no', alpha=0.1, figsize=(10, 10))
 
 
-# In[37]:
+# In[162]:
 
 
 #exploring if there exists a correlation between the different columns
 suicide_df.year.corr (suicide_df.suicides_no)
 
 
-# In[55]:
+# In[163]:
 
 
 #Sorting the dataframe biggest suicide number from the data set
 suicide_df.sort_values (by= "suicides_no", ascending=False).head (10)
 
 
-# In[57]:
+# In[164]:
 
 
 # Group the data by country and sum the suicides number
@@ -238,19 +238,19 @@ suicides_by_country = suicides_by_country.sort_values('suicides_no', ascending=F
 suicides_by_country
 
 
-# In[63]:
+# In[165]:
 
 
 pip install plotly
 
 
-# In[64]:
+# In[166]:
 
 
 import plotly.express as px
 
 
-# In[81]:
+# In[167]:
 
 
 # Create the map showing the distibution of the suicide reports across the world
@@ -258,7 +258,7 @@ fig = px.choropleth(suicides_by_country, locations='country', locationmode='coun
 fig.show()
 
 
-# In[52]:
+# In[168]:
 
 
 #Generating a wordcloud from the Cyberbullying tweets.
@@ -276,20 +276,20 @@ plt.show()
 
 # ## Machine Learning Implementation Process
 
-# In[92]:
+# In[169]:
 
 
 #Dropping all the missing values from the dataframe
 suicide_without_na = suicide_df.dropna () #removing empty data from the data frame
 
 
-# In[29]:
+# In[170]:
 
 
 suicide_without_na.isnull().sum() #Print the new data frame with dropped null values
 
 
-# In[114]:
+# In[171]:
 
 
 #Splitting the data set
@@ -298,7 +298,7 @@ train_set, test_set = train_test_split (suicide_df, test_size=0.2, random_state=
 train_set.head(10)
 
 
-# In[115]:
+# In[172]:
 
 
 #separating the predictor from the target
@@ -306,7 +306,7 @@ suicide_X = train_set.drop ('suicides_no', axis=1)
 suicide_Y = train_set['suicides_no'].copy()
 
 
-# In[116]:
+# In[173]:
 
 
 #Separating the numerical data from the categorical data and imputing the dataframe columns
@@ -319,27 +319,27 @@ suicide_num = suicide_X.drop(['country', 'sex', 'age', 'country-year', ' gdp_for
 imputer.fit(suicide_num)
 
 
-# In[117]:
+# In[174]:
 
 
 imputer.statistics_
 
 
-# In[118]:
+# In[175]:
 
 
 #Viewing the correlation matrix for the numerical data
 suicide_num.corr()
 
 
-# In[119]:
+# In[176]:
 
 
 #Handling Categorical Data
 suicide_cat = suicide_X[['country', 'sex', 'age', 'country-year', ' gdp_for_year ($) ', 'generation']] 
 
 
-# In[120]:
+# In[177]:
 
 
 #Transforming the Categorical Data
@@ -350,13 +350,13 @@ suicide_cat_encoded = ordinal_encoder.fit_transform (suicide_cat)
 
 
 
-# In[121]:
+# In[178]:
 
 
 suicide_cat_encoded
 
 
-# In[122]:
+# In[179]:
 
 
 #Using OneHotEncoder to encode the categorical data
@@ -367,7 +367,7 @@ suicide_cat_hot = oneHot_encoder.fit_transform(suicide_cat)
 suicide_cat_hot.toarray()
 
 
-# In[123]:
+# In[180]:
 
 
 #Using the Pipeline to fit our numerical and categorical transformed data
@@ -379,7 +379,7 @@ num_pipeline = Pipeline([
 suicide_num_tr = num_pipeline.fit_transform(suicide_num)
 
 
-# In[124]:
+# In[181]:
 
 
 cat_pipeline = Pipeline([
@@ -388,7 +388,7 @@ cat_pipeline = Pipeline([
 suicide_cat_tr = cat_pipeline.fit_transform(suicide_cat)
 
 
-# In[127]:
+# In[182]:
 
 
 #Performing the full Pipeline fitting
@@ -404,7 +404,7 @@ full_pipeline = ColumnTransformer ([
 clean_suicide = full_pipeline.fit_transform (suicide_X)
 
 
-# In[131]:
+# In[183]:
 
 
 #Linear Regression Analysis
@@ -440,7 +440,7 @@ lin_reg.fit (clean_suicide, suicide_Y)
 # # ⚠️ Make sure you run this cell at the end of your notebook before every submission!
 # !jupyter nbconvert --to python source.ipynb
 
-# In[30]:
+# In[ ]:
 
 
 get_ipython().system('jupyter nbconvert --to python source.ipynb')
